@@ -1,7 +1,18 @@
-#titleBar {
-
+#roundName {
+    text-align: center;
+    padding: 10px;
+    font-size: 36px;
+    background: #007bff;
+    color: white;
 }
 
-.titleButton {
-    
+#clock {
+    text-align: center;
+    padding: 5px;
+    font-size: 100px;
+}
+
+#buttonGroup {
+    padding-left: 300px;
+    padding-right: 300px;
 }
