@@ -4,8 +4,12 @@
 <head>
     <meta charset='UTF-8'>
     <title>Online Debate Timer</title>
+
+    <!-- Personal CSS File -->
     <link href="styles.css" type="text/css" rel="stylesheet">
 
+    <!-- Personal JavaScript File -->
+    <script src="timer.js"></script>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 
@@ -58,19 +62,19 @@
     </h1>
     <div class="container" id="buttonGroup">
         <div class="row text-center">
-            <div class="col-sm-3">
+            <div class="col-sm">
                 <button type="button" class="btn btn-primary">
                     <span class="fas fa-caret-left"></span> Previous</button>
             </div>
-            <div class="col-sm-3">
-                <button type="button" class="btn btn-success">
+            <div class="col-sm">
+                <button type="button" class="btn btn-success" onclick="start_stop()">
                     <span class="fas fa-play"></span> Start</button>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm">
                 <button type="button" class="btn btn-danger">
                     <span class="fas fa-undo"></span> Reset</button>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm">
                 <button type="button" class="btn btn-primary">Next
                     <span class="fas fa-caret-right"></span>
                 </button>
