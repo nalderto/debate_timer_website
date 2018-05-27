@@ -9,7 +9,7 @@
     <link href="styles.css" type="text/css" rel="stylesheet">
 
     <!-- Personal JavaScript File -->
-    <script src="timer.js"></script>
+    <script src="ld.js"></script>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 
@@ -56,33 +56,31 @@
         Affirmative Constructive
     </h1>
 
-
     <h1 id="clock">
         0:00
     </h1>
     <div class="container" id="buttonGroup">
         <div class="row text-center">
             <div class="col-sm">
-                <button type="button" class="btn btn-primary">
+                <button type="button" class="btn btn-primary" onclick="lastRound()">
                     <span class="fas fa-caret-left"></span> Previous</button>
             </div>
             <div class="col-sm">
                 <button id="startButton" type="button" class="btn btn-success" onclick="start()">
-                    <span id ="startIcon" class="fas fa-play"></span> Start</button>
+                    <span id ="startIcon" class="fas fa-play"></span> <span id="startTitle"> Start</span></button>
             </div>
             <div class="col-sm">
                 <button id="restartButton"type="button" class="btn btn-danger" onclick="reset()">
                     <span class="fas fa-undo"></span> Reset</button>
             </div>
             <div class="col-sm">
-                <button type="button" class="btn btn-primary">Next
+                <button type="button" class="btn btn-primary" onclick="nextRound()">Next
                     <span class="fas fa-caret-right"></span>
                 </button>
             </div>
         </div>
-        </button>
     </div>
-    </div>
+
 </body>
 
 </html>

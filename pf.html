@@ -1,47 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset='UTF-8'>
-        <title>Online Debate Timer</title>
-        <link href="styles.css" type="text/css" rel="stylesheet">
 
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<head>
+    <meta charset='UTF-8'>
+    <title>Online Debate Timer</title>
 
-        <!-- jQuery library -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Personal CSS File -->
+    <link href="styles.css" type="text/css" rel="stylesheet">
 
-        <!-- Popper JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <!-- Personal JavaScript File -->
+    <script src="pf.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 
-        <!-- Latest compiled JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-        
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-sm bg-success navbar-dark">
-            <!-- Brand -->
-            <a class="navbar-brand" href="index.html">Debate Timer</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#debateTypes">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            <div class="collapse navbar-collapse" id="debateTypes">
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+    <!-- Font Awesome Icons-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+        crossorigin="anonymous">
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm bg-success navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" href="index.html">Debate Timer</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#debateTypes">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="debateTypes">
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="ld.html">Lincoln-Douglas</a>
                 </li>
                 <li class="nav-item">
-                        <a class="nav-link" href="policy.html">Policy</a>
-                </li>
-                <li class="nav-item active">
-                        <a class="nav-link" href="pf.html">Public Forum</a>
+                    <a class="nav-link" href="policy.html">Policy</a>
                 </li>
                 <li class="nav-item">
-                        <a class="nav-link" href="wsd.html">World Schools</a>
+                    <a class="nav-link active" href="pf.html">Public Forum</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="wsd.html">World Schools</a>
                 </li>
             </ul>
+        </div>
+    </nav>
+    <h1 id="roundName">
+        Team A Speaker 1
+    </h1>
+
+    <h1 id="clock">
+        0:00
+    </h1>
+    <div class="container" id="buttonGroup">
+        <div class="row text-center">
+            <div class="col-sm">
+                <button type="button" class="btn btn-primary" onclick="lastRound()">
+                    <span class="fas fa-caret-left"></span> Previous</button>
             </div>
-        </nav>
-    </body>
+            <div class="col-sm">
+                <button id="startButton" type="button" class="btn btn-success" onclick="start()">
+                    <span id="startIcon" class="fas fa-play"></span>
+                    <span id="startTitle"> Start</span>
+                </button>
+            </div>
+            <div class="col-sm">
+                <button id="restartButton" type="button" class="btn btn-danger" onclick="reset()">
+                    <span class="fas fa-undo"></span> Reset</button>
+            </div>
+            <div class="col-sm">
+                <button type="button" class="btn btn-primary" onclick="nextRound()">Next
+                    <span class="fas fa-caret-right"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</body>
 </html>
