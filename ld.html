@@ -67,10 +67,12 @@
             </div>
             <div class="col-sm">
                 <button id="startButton" type="button" class="btn btn-success" onclick="start()">
-                    <span id ="startIcon" class="fas fa-play"></span> <span id="startTitle"> Start</span></button>
+                    <span id="startIcon" class="fas fa-play"></span>
+                    <span id="startTitle"> Start</span>
+                </button>
             </div>
             <div class="col-sm">
-                <button id="restartButton"type="button" class="btn btn-danger" onclick="reset()">
+                <button id="restartButton" type="button" class="btn btn-danger" onclick="reset()">
                     <span class="fas fa-undo"></span> Reset</button>
             </div>
             <div class="col-sm">
@@ -80,7 +82,40 @@
             </div>
         </div>
     </div>
-
+    <br>
+    <h1 class="text-center">Prep Time</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <h3 class="text-center">Affirmation</h3>
+                <h2 class="text-center prepClock">
+                    0:00
+                </h2>
+                <div class="container text-center" id="buttonGroup">
+                    <button type="button" class="btn btn-success">
+                        <span id="startIcon" class="fas fa-play"></span>
+                    </button>
+                    <button type="button" class="btn btn-danger">
+                        <span class="fas fa-undo"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="col-sm">
+                <h3 class="text-center">Negation</h3>
+                <h2 class="text-center prepClock">
+                    0:00
+                </h2>
+                <div class="container text-center" id="buttonGroup">
+                    <button type="button" class="btn btn-success">
+                        <span id="startIcon" class="fas fa-play"></span>
+                    </button>
+                    <button type="button" class="btn btn-danger">
+                        <span class="fas fa-undo"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
