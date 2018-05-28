@@ -47,17 +47,6 @@
     color: black;
 }
 
-.left{
-    float: left;
-    margin: 10px;
-    margin-left: 100px;
-}
-.right{
-    float: right;
-    margin: 10px;
-    margin-right: 100px;
-}
-
 .prepClock{
     font-size: 40px;
 }

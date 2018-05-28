@@ -88,28 +88,28 @@
         <div class="row">
             <div class="col-sm">
                 <h3 class="text-center">Affirmation</h3>
-                <h2 class="text-center prepClock">
+                <h2 id="affClock" class="text-center prepClock">
                     0:00
                 </h2>
                 <div class="container text-center" id="buttonGroup">
-                    <button type="button" class="btn btn-success">
-                        <span id="startIcon" class="fas fa-play"></span>
+                    <button id="affPrepStartButton" type="button" class="btn btn-success" onclick="affPrepStart()">
+                        <span id="affPrepStartIcon" class="fas fa-play"></span>
                     </button>
-                    <button type="button" class="btn btn-danger">
+                    <button type="button" class="btn btn-danger" onclick="affPrepReset()">
                         <span class="fas fa-undo"></span>
                     </button>
                 </div>
             </div>
             <div class="col-sm">
                 <h3 class="text-center">Negation</h3>
-                <h2 class="text-center prepClock">
+                <h2 id="negClock" class="text-center prepClock">
                     0:00
                 </h2>
                 <div class="container text-center" id="buttonGroup">
-                    <button type="button" class="btn btn-success">
-                        <span id="startIcon" class="fas fa-play"></span>
+                    <button id = "negPrepStartButton" type="button" class="btn btn-success" onclick="negPrepStart()">
+                        <span id="negPrepStartIcon" class="fas fa-play"></span>
                     </button>
-                    <button type="button" class="btn btn-danger">
+                    <button type="button" class="btn btn-danger" onclick="negPrepReset()">
                         <span class="fas fa-undo"></span>
                     </button>
                 </div>
