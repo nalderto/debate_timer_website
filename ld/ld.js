@@ -17,6 +17,7 @@ var currentRound = 0;
 
 var roundNames = ["Affirmative Constructive", "Cross Examination", "Negative Constructive", "Cross Examination", "First Affirmative Rebuttal", "Second Negative Rebuttal", "Second Affirmative Rebuttal"];
 
+var roundTimes = [6, 3, 7, 3, 4, 6, 3];
 
 function start() {
     var startTime = Date.now();
@@ -36,17 +37,20 @@ function stop() {
 }
 
 function nextRound() {
-    if (currentRound < 7) {
+    if (currentRound < 6) {
         currentRound++;
+        document.getElementById("roundName").innerHTML = roundNames[currentRound];
+        reset();
     }
-    document.getElementById("roundName").innerHTML = roundNames[currentRound];
+
 }
 
 function lastRound() {
     if (currentRound > 0) {
         currentRound--;
+        document.getElementById("roundName").innerHTML = roundNames[currentRound];
+        reset();
     }
-    document.getElementById("roundName").innerHTML = roundNames[currentRound];
 }
 
 function reset() {
@@ -57,6 +61,7 @@ function reset() {
     document.getElementById("startButton").setAttribute("onClick", "javascript: start()");
     document.getElementById("startTitle").innerHTML = " Start";
     document.getElementById("startIcon").setAttribute("class", "fas fa-play");
+    document.getElementById("overtimeLabel").style.display = "none";
 }
 
 function updateClock(startTime) {
@@ -72,6 +77,12 @@ function updateClock(startTime) {
         secondsString = seconds;
     }
     document.getElementById("clock").innerHTML = `${minutes}:${secondsString}`;
+    if (minutes >= roundTimes[currentRound]) {
+        document.getElementById("overtimeLabel").style.display = "block";
+    }
+    if (minutes == roundTimes[currentRound] && seconds == 0) {
+        playDing();
+    }
 }
 
 function updateAffPrepClock(startTime) {
@@ -87,6 +98,9 @@ function updateAffPrepClock(startTime) {
         secondsString = affPrepSeconds;
     }
     document.getElementById("affClock").innerHTML = `${affPrepMinutes}:${secondsString}`;
+    if (minutes == 4 && seconds == 0) {
+        playDing();
+    }
 }
 
 function updateNegPrepClock(startTime) {
@@ -102,6 +116,9 @@ function updateNegPrepClock(startTime) {
         secondsString = negPrepSeconds;
     }
     document.getElementById("negClock").innerHTML = `${negPrepMinutes}:${secondsString}`;
+    if (minutes == 4 && seconds == 0) {
+        playDing();
+    }
 }
 
 function affPrepStart() {
@@ -119,7 +136,7 @@ function affPrepStop() {
     document.getElementById("affPrepStartIcon").setAttribute("class", "fas fa-play");
 }
 
-function affPrepReset(){
+function affPrepReset() {
     affLastPrepMinutes = 0;
     affLastPrepSeconds = 0;
     document.getElementById("affClock").innerHTML = `0:00`;
@@ -135,7 +152,7 @@ function negPrepStart() {
     document.getElementById("negPrepStartIcon").setAttribute("class", "fas fa-pause");
 }
 
-function negPrepStop(){
+function negPrepStop() {
     negLastPrepSeconds = negPrepSeconds;
     negLastPrepMinutes = negPrepMinutes;
     clearInterval(negTimerInterval);
@@ -143,11 +160,15 @@ function negPrepStop(){
     document.getElementById("negPrepStartIcon").setAttribute("class", "fas fa-play");
 }
 
-function negPrepReset(){
+function negPrepReset() {
     negLastPrepMinutes = 0;
     negLastPrepSeconds = 0;
     document.getElementById("negClock").innerHTML = `0:00`;
     clearInterval(negTimerInterval);
     document.getElementById("negPrepStartButton").setAttribute("onClick", "javascript: negPrepstart()");
     document.getElementById("negPrepStartIcon").setAttribute("class", "fas fa-play");
+}
+
+function playDing() {
+    document.getElementById("ding").play();
 }

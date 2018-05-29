@@ -50,3 +50,12 @@
 .prepClock{
     font-size: 40px;
 }
+
+#overtimeLabel{
+    text-align: center;
+    padding: 10px;
+    font-size: 36px;
+    background: #dc3545;
+    color: white;
+    display: none;
+}
