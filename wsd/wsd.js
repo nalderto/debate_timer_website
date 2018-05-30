@@ -56,8 +56,8 @@ function reset() {
 function updateClock(startTime){
     var change = Date.now() - startTime;
     var secondsDiff = Math.floor(change / 1000);
-    seconds = lastSeconds + (secondsDiff % 60);
-    minutes = lastMinutes + (Math.floor(secondsDiff / 60));
+    seconds = ((lastSeconds + secondsDiff) % 60);
+    minutes = lastMinutes + (Math.floor((secondsDiff + lastSeconds) / 60));
     var secondsString = "";
     if (seconds < 10){
         secondsString = "0"+seconds;

@@ -64,23 +64,21 @@ function reset() {
     $('#overtimeWrapper').collapse('hide');
 }
 
-function updateClock(startTime) {
+function updateClock(startTime){
     var change = Date.now() - startTime;
     var secondsDiff = Math.floor(change / 1000);
-    seconds = lastSeconds + (secondsDiff % 60);
-    minutes = lastMinutes + (Math.floor(secondsDiff / 60));
+    seconds = ((lastSeconds + secondsDiff) % 60);
+    minutes = lastMinutes + (Math.floor((secondsDiff + lastSeconds)/ 60));
     var secondsString = "";
-    if (seconds < 10) {
-        secondsString = "0" + seconds;
+    if (seconds < 10){
+        secondsString = "0"+seconds;
     }
-    else {
+    else{
         secondsString = seconds;
     }
     document.getElementById("clock").innerHTML = `${minutes}:${secondsString}`;
-    if (minutes >= roundTimes[currentRound]) {
-        $('#overtimeWrapper').collapse('show');
-    }
     if (minutes == roundTimes[currentRound] && seconds == 0) {
+        $('#overtimeWrapper').collapse('show');
         playDing();
     }
 }
@@ -88,8 +86,8 @@ function updateClock(startTime) {
 function updateAffPrepClock(startTime) {
     var change = Date.now() - startTime;
     var secondsDiff = Math.floor(change / 1000);
-    affPrepSeconds = affLastPrepSeconds + (secondsDiff % 60);
-    affPrepMinutes = affLastPrepMinutes + (Math.floor(secondsDiff / 60));
+    affPrepSeconds = (affLastPrepSeconds + secondsDiff) % 60;
+    affPrepMinutes = affLastPrepMinutes + (Math.floor((secondsDiff + affLastPrepSeconds) / 60));
     var secondsString = "";
     if (affPrepSeconds < 10) {
         secondsString = "0" + affPrepSeconds;
@@ -106,8 +104,8 @@ function updateAffPrepClock(startTime) {
 function updateNegPrepClock(startTime) {
     var change = Date.now() - startTime;
     var secondsDiff = Math.floor(change / 1000);
-    negPrepSeconds = negLastPrepSeconds + (secondsDiff % 60);
-    negPrepMinutes = negLastPrepMinutes + (Math.floor(secondsDiff / 60));
+    negPrepSeconds = ((secondsDiff + negLastPrepSeconds)% 60);
+    negPrepMinutes = negLastPrepMinutes + (Math.floor((secondsDiff + negLastPrepSeconds)/ 60));
     var secondsString = "";
     if (negPrepSeconds < 10) {
         secondsString = "0" + negPrepSeconds;
