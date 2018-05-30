@@ -30,6 +30,7 @@ function nextRound(){
         currentRound++;
     }
     document.getElementById("roundName").innerHTML = roundNames[currentRound];
+    reset();
 }
 
 function lastRound(){
@@ -37,6 +38,7 @@ function lastRound(){
         currentRound--;
     }
     document.getElementById("roundName").innerHTML = roundNames[currentRound];
+    reset();
 }
 
 function reset() {
@@ -47,6 +49,8 @@ function reset() {
     document.getElementById("startButton").setAttribute("onClick", "javascript: start()");
     document.getElementById("startTitle").innerHTML = " Start";
     document.getElementById("startIcon").setAttribute("class", "fas fa-play");
+    $('#protectedWrapper').collapse('hide');
+    $('#overtimeWrapper').collapse('hide');
 }
 
 function updateClock(startTime){
@@ -62,4 +66,39 @@ function updateClock(startTime){
         secondsString = seconds;
     }
     document.getElementById("clock").innerHTML = `${minutes}:${secondsString}`;
+    if(currentRound != 6 && currentRound != 7) {
+        if (minutes == 0 && seconds == 0){
+            $('#protectedWrapper').collapse('show');
+        }
+        else if (minutes == 8 && seconds == 0){
+            $('#protectedWrapper').collapse('hide');
+            playDing();
+        }
+        else if (minutes == 1 && seconds == 0) {
+            $('#protectedWrapper').collapse('hide');
+            playDing();
+        }
+        else if (minutes == 8 && seconds == 0) {
+            $('#overtimeWrapper').collapse('show');
+        }
+        else if ((minutes == 7 && seconds == 0)){
+            $('#protectedWrapper').collapse('show');
+            playDing();
+        }
+        
+    }
+    else if(currentRound == 6 || currentRound == 7) {
+        if (minutes == 0 && seconds == 0){
+            $('#protectedWrapper').collapse('show');
+        }
+        else if (minutes == 4 && seconds == 0) {
+            $('#protectedWrapper').collapse('hide');
+            $('#overtimeWrapper').collapse('show');
+            playDing();
+        }
+    }
+}
+
+function playDing() {
+    document.getElementById("ding").play();
 }

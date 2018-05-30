@@ -61,7 +61,7 @@ function reset() {
     document.getElementById("startButton").setAttribute("onClick", "javascript: start()");
     document.getElementById("startTitle").innerHTML = " Start";
     document.getElementById("startIcon").setAttribute("class", "fas fa-play");
-    document.getElementById("overtimeLabel").style.display = "none";
+    $('#overtimeWrapper').collapse('hide');
 }
 
 function updateClock(startTime) {
@@ -78,7 +78,7 @@ function updateClock(startTime) {
     }
     document.getElementById("clock").innerHTML = `${minutes}:${secondsString}`;
     if (minutes >= roundTimes[currentRound]) {
-        document.getElementById("overtimeLabel").style.display = "block";
+        $('#overtimeWrapper').collapse('show');
     }
     if (minutes == roundTimes[currentRound] && seconds == 0) {
         playDing();

@@ -13,7 +13,7 @@
 }
 
 #buttonGroup {
-    max-width: 500px;
+    max-width: 550px;
 }
 
 #startButton {
@@ -57,5 +57,12 @@
     font-size: 36px;
     background: #dc3545;
     color: white;
-    display: none;
+}
+
+#protectedLabel{
+    text-align: center;
+    padding: 10px;
+    font-size: 36px;
+    background: #fd7e14;
+    color: white;
 }
