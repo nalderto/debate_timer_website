@@ -7,14 +7,12 @@ var lastMinutes = 0;
 var lastSeconds = 0;
 var affPrepMinutes = 0;
 var affPrepSeconds = 0;
-var affLastPrepSeconds = 0;
-var affLastPrepMinutes = 0;
 var negPrepMinutes = 0;
 var negPrepSeconds = 0;
-var negLastPrepSeconds = 0;
-var negLastPrepMinutes = 0;
 var currentRound = 0;
 var prepTime = 5;
+var affPrepTimeLeft = prepTime * 60;
+var negPrepTimeLeft = prepTime * 60;
 
 var roundNames = ["1st Affirmative Constructive","Cross Examination","1st Negative Constructive","Cross Examination","2nd Affirmative Constructive","Cross Examination","2nd Affirmative Constructive", "Cross Examination", "1st Negative Rebuttal", "1st Affirmative Rebuttal", "2nd Negative Rebuttal", "2nd Affirmative Rebuttal"];
 
@@ -82,10 +80,11 @@ function updateClock(startTime){
 }
 
 function updateAffPrepClock(startTime) {
-    var change = Date.now() - startTime;
+    var endTime = startTime + (affPrepTimeLeft*1000)
+    var change = endTime - Date.now();
     var secondsDiff = Math.floor(change / 1000);
-    affPrepSeconds = (affLastPrepSeconds + secondsDiff) % 60;
-    affPrepMinutes = affLastPrepMinutes + (Math.floor((secondsDiff + affLastPrepSeconds) / 60));
+    affPrepSeconds = secondsDiff % 60;
+    affPrepMinutes = Math.floor((secondsDiff) / 60);
     var secondsString = "";
     if (affPrepSeconds < 10) {
         secondsString = "0" + affPrepSeconds;
@@ -100,10 +99,11 @@ function updateAffPrepClock(startTime) {
 }
 
 function updateNegPrepClock(startTime) {
-    var change = Date.now() - startTime;
+    var endTime = startTime + (negPrepTimeLeft*1000)
+    var change = endTime - Date.now();
     var secondsDiff = Math.floor(change / 1000);
-    negPrepSeconds = ((secondsDiff + negLastPrepSeconds)% 60);
-    negPrepMinutes = negLastPrepMinutes + (Math.floor((secondsDiff + negLastPrepSeconds)/ 60));
+    negPrepSeconds = secondsDiff % 60;
+    negPrepMinutes = Math.floor((secondsDiff) / 60);
     var secondsString = "";
     if (negPrepSeconds < 10) {
         secondsString = "0" + negPrepSeconds;
@@ -125,17 +125,15 @@ function affPrepStart() {
 }
 
 function affPrepStop() {
-    affLastPrepSeconds = affPrepSeconds;
-    affLastPrepMinutes = affPrepMinutes;
+    affPrepTimeLeft = affPrepMinutes*60 + affPrepSeconds
     clearInterval(affTimerInterval);
     document.getElementById("affPrepStartButton").setAttribute("onClick", "javascript: affPrepStart()");
     document.getElementById("affPrepStartIcon").setAttribute("class", "fas fa-play");
 }
 
 function affPrepReset() {
-    affLastPrepMinutes = 0;
-    affLastPrepSeconds = 0;
-    document.getElementById("affClock").innerHTML = `0:00`;
+    affPrepTimeLeft = prepTime * 60;
+    document.getElementById("affClock").innerHTML = `${prepTime}:00`;
     clearInterval(affTimerInterval);
     document.getElementById("affPrepStartButton").setAttribute("onClick", "javascript: affPrepStart()");
     document.getElementById("affPrepStartIcon").setAttribute("class", "fas fa-play");
@@ -149,26 +147,20 @@ function negPrepStart() {
 }
 
 function negPrepStop() {
-    negLastPrepSeconds = negPrepSeconds;
-    negLastPrepMinutes = negPrepMinutes;
+    negPrepTimeLeft = negPrepMinutes*60 + negPrepSeconds
     clearInterval(negTimerInterval);
     document.getElementById("negPrepStartButton").setAttribute("onClick", "javascript: negPrepStart()");
     document.getElementById("negPrepStartIcon").setAttribute("class", "fas fa-play");
 }
 
 function negPrepReset() {
-    negLastPrepMinutes = 0;
-    negLastPrepSeconds = 0;
-    document.getElementById("negClock").innerHTML = `0:00`;
+    negPrepTimeLeft = prepTime * 60;
+    document.getElementById("negClock").innerHTML = `${prepTime}:00`;
     clearInterval(negTimerInterval);
-    document.getElementById("negPrepStartButton").setAttribute("onClick", "javascript: negPrepstart()");
+    document.getElementById("negPrepStartButton").setAttribute("onClick", "javascript: negPrepStart()");
     document.getElementById("negPrepStartIcon").setAttribute("class", "fas fa-play");
 }
 
 function playDing() {
     document.getElementById("ding").play();
-}
-
-function addSeconds(date, seconds) {
-    return new Date(date.getTime() + seconds*1000);
 }
