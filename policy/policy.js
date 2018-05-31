@@ -57,6 +57,7 @@ function reset() {
     document.getElementById("startButton").setAttribute("onClick", "javascript: start()");
     document.getElementById("startTitle").innerHTML = " Start";
     document.getElementById("startIcon").setAttribute("class", "fas fa-play");
+    $('#overtimeWrapper').collapse('hide');
 }
 
 function updateClock(startTime){
@@ -76,7 +77,6 @@ function updateClock(startTime){
         $('#overtimeWrapper').collapse('show');
         playDing();
     }
-    console.log(prepTime);
 }
 
 function updateAffPrepClock(startTime) {

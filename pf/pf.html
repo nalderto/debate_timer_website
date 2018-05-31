@@ -83,5 +83,86 @@
         </div>
     </div>
 
+    <div class="collapse" id="overtimeWrapper">
+        <h1 class="text-center" id="overtimeLabel">Overtime</h2>
+    </div>
+
+    <h1 class="text-center">Prep Time</h1>
+
+    <div class="container text-center">
+        <div class="btn-group">
+            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">2 Minutes
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li class="dropdown-item px-2" value="1">
+                    <a href="#">1 Minutes</a>
+                </li>
+                <li class="dropdown-item px-2" value="2">
+                    <a href="#">2 Minutes</a>
+                </li>
+                <li class="dropdown-item px-2" value="3">
+                    <a href="#">3 Minutes</a>
+                </li>
+                <li class="dropdown-item px-2" value="4">
+                    <a href="#">4 Minutes</a>
+                </li>
+                <li class="dropdown-item px-2" value="5">
+                    <a href="#">5 Minutes</a>
+                </li>
+                <li class="dropdown-item px-2" value="6">
+                    <a href="#">6 Minutes</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-auto">
+                <h3 class="text-center">Team A</h3>
+                <h2 id="affClock" class="text-center prepClock">
+                    2:00
+                </h2>
+                <div class="container text-center" id="buttonGroup">
+                    <button id="affPrepStartButton" type="button" class="btn btn-success" onclick="affPrepStart()">
+                        <span id="affPrepStartIcon" class="fas fa-play"></span>
+                    </button>
+                    <button type="button" class="btn btn-danger" onclick="affPrepReset()">
+                        <span class="fas fa-undo"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="col-sm-auto">
+                <h3 class="text-center">Team B</h3>
+                <h2 id="negClock" class="text-center prepClock">
+                    2:00
+                </h2>
+                <div class="container text-center" id="buttonGroup">
+                    <button id="negPrepStartButton" type="button" class="btn btn-success" onclick="negPrepStart()">
+                        <span id="negPrepStartIcon" class="fas fa-play"></span>
+                    </button>
+                    <button type="button" class="btn btn-danger" onclick="negPrepReset()">
+                        <span class="fas fa-undo"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Audio-->
+    <audio id="ding" src="../audio/ding.wav" preload="auto"></audio>
+
+    <!--Dropdown Javascript-->
+    <script>
+        $(".dropdown-menu li").click(function () {
+            var selText = $(this).children().text();
+            $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+            prepTime = $(this).val();
+            affPrepReset();
+            negPrepReset()
+        });
+
+    </script>
 </body>
+
 </html>

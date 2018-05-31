@@ -94,6 +94,9 @@
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
+                <li class="dropdown-item px-2" value="4">
+                    <a href="#">4 Minutes</a>
+                </li>
                 <li class="dropdown-item px-2" value="5">
                     <a href="#">5 Minutes</a>
                 </li>
@@ -115,7 +118,6 @@
             </ul>
         </div>
     </div>
-
 
     <div class="container">
         <div class="row justify-content-center">
@@ -158,9 +160,9 @@
         $(".dropdown-menu li").click(function () {
             var selText = $(this).children().text();
             $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
-                prepTime = $(this).val();
-                affPrepReset();
-                negPrepReset();
+            prepTime = $(this).val();
+            affPrepReset();
+            negPrepReset();
         });
 
     </script>

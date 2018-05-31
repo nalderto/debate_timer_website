@@ -1,12 +1,22 @@
 var timerInterval;
+var affTimerInterval;
+var negTimerInterval;
 var minutes = 0;
 var seconds = 0;
 var lastMinutes = 0;
 var lastSeconds = 0;
-
+var affPrepMinutes = 0;
+var affPrepSeconds = 0;
+var negPrepMinutes = 0;
+var negPrepSeconds = 0;
 var currentRound = 0;
+var prepTime = 2;
+var affPrepTimeLeft = prepTime * 60;
+var negPrepTimeLeft = prepTime * 60;
 
 var roundNames = ["Team A Speaker 1","Team B Speaker 1","Crossfire","Team A Speaker 2","Team B Speaker 2","Crossfire","Team A Speaker 1", "Team B Speaker 1", "Grand Crossfire", "Team A Speaker 2", "Team B Speaker 2"];
+
+var roundTimes = [4, 4, 3, 4, 4, 3, 2, 2, 3, 2, 2];
 
 function start(){
         var startTime = Date.now();
@@ -30,6 +40,7 @@ function nextRound(){
         currentRound++;
     }
     document.getElementById("roundName").innerHTML = roundNames[currentRound];
+    reset();
 }
 
 function lastRound(){
@@ -37,6 +48,7 @@ function lastRound(){
         currentRound--;
     }
     document.getElementById("roundName").innerHTML = roundNames[currentRound];
+    reset();
 }
 
 function reset() {
@@ -47,6 +59,7 @@ function reset() {
     document.getElementById("startButton").setAttribute("onClick", "javascript: start()");
     document.getElementById("startTitle").innerHTML = " Start";
     document.getElementById("startIcon").setAttribute("class", "fas fa-play");
+    $('#overtimeWrapper').collapse('hide');
 }
 
 function updateClock(startTime){
@@ -62,4 +75,95 @@ function updateClock(startTime){
         secondsString = seconds;
     }
     document.getElementById("clock").innerHTML = `${minutes}:${secondsString}`;
+    if (minutes == roundTimes[currentRound] && seconds == 0) {
+        $('#overtimeWrapper').collapse('show');
+        playDing();
+    }
+}
+
+
+function updateAffPrepClock(startTime) {
+    var endTime = startTime + (affPrepTimeLeft*1000)
+    var change = endTime - Date.now();
+    var secondsDiff = Math.floor(change / 1000);
+    affPrepSeconds = secondsDiff % 60;
+    affPrepMinutes = Math.floor((secondsDiff) / 60);
+    var secondsString = "";
+    if (affPrepSeconds < 10) {
+        secondsString = "0" + affPrepSeconds;
+    }
+    else {
+        secondsString = affPrepSeconds;
+    }
+    document.getElementById("affClock").innerHTML = `${affPrepMinutes}:${secondsString}`;
+    if (minutes == 4 && seconds == 0) {
+        playDing();
+    }
+}
+
+function updateNegPrepClock(startTime) {
+    var endTime = startTime + (negPrepTimeLeft*1000)
+    var change = endTime - Date.now();
+    var secondsDiff = Math.floor(change / 1000);
+    negPrepSeconds = secondsDiff % 60;
+    negPrepMinutes = Math.floor((secondsDiff) / 60);
+    var secondsString = "";
+    if (negPrepSeconds < 10) {
+        secondsString = "0" + negPrepSeconds;
+    }
+    else {
+        secondsString = negPrepSeconds;
+    }
+    document.getElementById("negClock").innerHTML = `${negPrepMinutes}:${secondsString}`;
+    if (minutes == 4 && seconds == 0) {
+        playDing();
+    }
+}
+
+function affPrepStart() {
+    var startTime = Date.now();
+    affTimerInterval = setInterval(function () { updateAffPrepClock(startTime) }, 100);
+    document.getElementById("affPrepStartButton").setAttribute("onClick", "javascript: affPrepStop()");
+    document.getElementById("affPrepStartIcon").setAttribute("class", "fas fa-pause");
+}
+
+function affPrepStop() {
+    affPrepTimeLeft = affPrepMinutes*60 + affPrepSeconds
+    clearInterval(affTimerInterval);
+    document.getElementById("affPrepStartButton").setAttribute("onClick", "javascript: affPrepStart()");
+    document.getElementById("affPrepStartIcon").setAttribute("class", "fas fa-play");
+}
+
+function affPrepReset() {
+    affPrepTimeLeft = prepTime * 60;
+    document.getElementById("affClock").innerHTML = `${prepTime}:00`;
+    clearInterval(affTimerInterval);
+    document.getElementById("affPrepStartButton").setAttribute("onClick", "javascript: affPrepStart()");
+    document.getElementById("affPrepStartIcon").setAttribute("class", "fas fa-play");
+}
+
+function negPrepStart() {
+    var startTime = Date.now();
+    negTimerInterval = setInterval(function () { updateNegPrepClock(startTime) }, 100);
+    document.getElementById("negPrepStartButton").setAttribute("onClick", "javascript: negPrepStop()");
+    document.getElementById("negPrepStartIcon").setAttribute("class", "fas fa-pause");
+}
+
+function negPrepStop() {
+    negPrepTimeLeft = negPrepMinutes*60 + negPrepSeconds
+    clearInterval(negTimerInterval);
+    document.getElementById("negPrepStartButton").setAttribute("onClick", "javascript: negPrepStart()");
+    document.getElementById("negPrepStartIcon").setAttribute("class", "fas fa-play");
+}
+
+function negPrepReset() {
+    negPrepTimeLeft = prepTime * 60;
+    document.getElementById("negClock").innerHTML = `${prepTime}:00`;
+    clearInterval(negTimerInterval);
+    document.getElementById("negPrepStartButton").setAttribute("onClick", "javascript: negPrepStart()");
+    document.getElementById("negPrepStartIcon").setAttribute("class", "fas fa-play");
+}
+
+function playDing() {
+    document.getElementById("ding").play();
 }
