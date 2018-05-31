@@ -1,4 +1,6 @@
 var timerInterval;
+var affTimerInterval;
+var negTimerInterval;
 var minutes = 0;
 var seconds = 0;
 var lastMinutes = 0;
@@ -12,6 +14,7 @@ var negPrepSeconds = 0;
 var negLastPrepSeconds = 0;
 var negLastPrepMinutes = 0;
 var currentRound = 0;
+var prepTime = 5;
 
 var roundNames = ["1st Affirmative Constructive","Cross Examination","1st Negative Constructive","Cross Examination","2nd Affirmative Constructive","Cross Examination","2nd Affirmative Constructive", "Cross Examination", "1st Negative Rebuttal", "1st Affirmative Rebuttal", "2nd Negative Rebuttal", "2nd Affirmative Rebuttal"];
 
@@ -75,6 +78,7 @@ function updateClock(startTime){
         $('#overtimeWrapper').collapse('show');
         playDing();
     }
+    console.log(prepTime);
 }
 
 function updateAffPrepClock(startTime) {
@@ -163,4 +167,8 @@ function negPrepReset() {
 
 function playDing() {
     document.getElementById("ding").play();
+}
+
+function addSeconds(date, seconds) {
+    return new Date(date.getTime() + seconds*1000);
 }
