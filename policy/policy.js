@@ -93,8 +93,12 @@ function updateAffPrepClock(startTime) {
         secondsString = affPrepSeconds;
     }
     document.getElementById("affClock").innerHTML = `${affPrepMinutes}:${secondsString}`;
-    if (minutes == 4 && seconds == 0) {
+    if (affPrepMinutes == 0 && affPrepSeconds == 0) {
         playDing();
+        affPrepReset();
+        document.getElementById("affClock").style.color = "#dc3545";
+        document.getElementById("affClock").innerHTML = '0:00';
+
     }
 }
 
@@ -112,8 +116,11 @@ function updateNegPrepClock(startTime) {
         secondsString = negPrepSeconds;
     }
     document.getElementById("negClock").innerHTML = `${negPrepMinutes}:${secondsString}`;
-    if (minutes == 4 && seconds == 0) {
+    if (negPrepMinutes == 0 && negPrepSeconds == 0) {
         playDing();
+        negPrepReset();
+        document.getElementById("negClock").style.color = "#dc3545";
+        document.getElementById("negClock").innerHTML = '0:00';
     }
 }
 
@@ -137,6 +144,7 @@ function affPrepReset() {
     clearInterval(affTimerInterval);
     document.getElementById("affPrepStartButton").setAttribute("onClick", "javascript: affPrepStart()");
     document.getElementById("affPrepStartIcon").setAttribute("class", "fas fa-play");
+    document.getElementById("negClock").style.color = "black";
 }
 
 function negPrepStart() {
@@ -159,6 +167,7 @@ function negPrepReset() {
     clearInterval(negTimerInterval);
     document.getElementById("negPrepStartButton").setAttribute("onClick", "javascript: negPrepStart()");
     document.getElementById("negPrepStartIcon").setAttribute("class", "fas fa-play");
+    document.getElementById("negClock").style.color = "black";
 }
 
 function playDing() {

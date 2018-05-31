@@ -96,8 +96,11 @@ function updateAffPrepClock(startTime) {
         secondsString = affPrepSeconds;
     }
     document.getElementById("affClock").innerHTML = `${affPrepMinutes}:${secondsString}`;
-    if (minutes == 4 && seconds == 0) {
+    if (minutes == 0 && seconds == 0) {
         playDing();
+        affPrepReset();
+        document.getElementById("affClock").style.color = "#dc3545";
+        document.getElementById("affClock").innerHTML = '0:00';
     }
 }
 
@@ -114,8 +117,11 @@ function updateNegPrepClock(startTime) {
         secondsString = negPrepSeconds;
     }
     document.getElementById("negClock").innerHTML = `${negPrepMinutes}:${secondsString}`;
-    if (minutes == 4 && seconds == 0) {
+    if (minutes == 0 && seconds == 0) {
         playDing();
+        negPrepReset();
+        document.getElementById("negClock").style.color = "#dc3545";
+        document.getElementById("negClock").innerHTML = '0:00';
     }
 }
 
