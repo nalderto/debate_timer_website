@@ -72,9 +72,10 @@
 }
 
 #volumeDiv{
-    margin-bottom: -50px;
+    margin-bottom: -90px;
     text-align: right;
-    margin-right: 15px;
+    margin-right: 10px;
+    overflow: hidden;
 }
 
 #volumeButton{
@@ -82,9 +83,11 @@
 }
 
 #infoDiv{
-    margin-bottom: -48px;
+    margin-bottom: -100px;
+    margin-top: 85px;
     text-align: right;
-    margin-right: 65px;
+    margin-right: 10px;
+    overflow: hidden;
 }
 
 #infoButton{
