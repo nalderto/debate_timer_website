@@ -160,16 +160,7 @@
     <!--Audio-->
     <audio id="ding" src="../audio/ding.wav" preload="auto"></audio>
     <audio id="alarm" src="../audio/alarm.wav" preload="auto"></audio>
-    <!--Dropdown Javascript-->
-    <script>
-        $(".dropdown-menu li").click(function () {
-            var selText = $(this).children().text();
-            $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
-            prepTime = $(this).val();
-            affPrepReset();
-            negPrepReset();
-        });
-    </script>
+
     <!-- Info Modal -->
     <div class="modal fade" id="info">
         <div class="modal-dialog">
@@ -234,7 +225,16 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-
+    <!--Dropdown Javascript-->
+    <script>
+        $(".dropdown-menu li").click(function () {
+            var selText = $(this).children().text();
+            $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+            prepTime = $(this).val();
+            affPrepReset();
+            negPrepReset();
+        });
+    </script>
 </body>
 
 </html>
