@@ -7,27 +7,27 @@ var lastMinutes = 0;
 var lastSeconds = 0;
 var affPrepMinutes = 0;
 var affPrepSeconds = 0;
-var affLastPrepSeconds = 0;
-var affLastPrepMinutes = 0;
 var negPrepMinutes = 0;
 var negPrepSeconds = 0;
-var negLastPrepSeconds = 0;
-var negLastPrepMinutes = 0;
 var currentRound = 0;
+var prepTime = 4;
+var affPrepTimeLeft = prepTime * 60;
+var negPrepTimeLeft = prepTime * 60;
+var isMuted = false;
 
-var roundNames = ["Affirmative Constructive", "Cross Examination", "Negative Constructive", "Cross Examination", "First Affirmative Rebuttal", "Second Negative Rebuttal", "Second Affirmative Rebuttal"];
+var roundNames = ["Affirmative Constructive", "Cross Examination", "Negative Constructive", "Cross Examination", "First Affirmative Rebuttal", "Negative Rebuttal", "Second Affirmative Rebuttal"];
 
 var roundTimes = [6, 3, 7, 3, 4, 6, 3];
 
-function start() {
-    var startTime = Date.now();
-    timerInterval = setInterval(function () { updateClock(startTime) }, 100);
-    document.getElementById("startButton").setAttribute("onClick", "javascript: stop()");
-    document.getElementById("startTitle").innerHTML = " Pause";
-    document.getElementById("startIcon").setAttribute("class", "fas fa-pause");
+function start(){
+        var startTime = Date.now();
+        timerInterval = setInterval(function(){updateClock(startTime)}, 100);
+        document.getElementById("startButton").setAttribute("onClick", "javascript: stop()");
+        document.getElementById("startTitle").innerHTML = " Pause";
+        document.getElementById("startIcon").setAttribute("class", "fas fa-pause");
 }
 
-function stop() {
+function stop(){
     lastSeconds = seconds;
     lastMinutes = minutes;
     clearInterval(timerInterval);
@@ -36,21 +36,20 @@ function stop() {
     document.getElementById("startIcon").setAttribute("class", "fas fa-play");
 }
 
-function nextRound() {
-    if (currentRound < 6) {
+function nextRound(){
+    if(currentRound < 6){
         currentRound++;
-        document.getElementById("roundName").innerHTML = roundNames[currentRound];
-        reset();
     }
-
+    document.getElementById("roundName").innerHTML = roundNames[currentRound];
+    reset();
 }
 
-function lastRound() {
-    if (currentRound > 0) {
+function lastRound(){
+    if(currentRound > 0){
         currentRound--;
-        document.getElementById("roundName").innerHTML = roundNames[currentRound];
-        reset();
     }
+    document.getElementById("roundName").innerHTML = roundNames[currentRound];
+    reset();
 }
 
 function reset() {
@@ -67,8 +66,8 @@ function reset() {
 function updateClock(startTime){
     var change = Date.now() - startTime;
     var secondsDiff = Math.floor(change / 1000);
-    seconds = ((lastSeconds + secondsDiff) % 60);
-    minutes = lastMinutes + (Math.floor((secondsDiff + lastSeconds)/ 60));
+    seconds = lastSeconds + (secondsDiff % 60);
+    minutes = lastMinutes + (Math.floor(secondsDiff / 60));
     var secondsString = "";
     if (seconds < 10){
         secondsString = "0"+seconds;
@@ -83,11 +82,13 @@ function updateClock(startTime){
     }
 }
 
+
 function updateAffPrepClock(startTime) {
-    var change = Date.now() - startTime;
+    var endTime = startTime + (affPrepTimeLeft*1000)
+    var change = endTime - Date.now();
     var secondsDiff = Math.floor(change / 1000);
-    affPrepSeconds = (affLastPrepSeconds + secondsDiff) % 60;
-    affPrepMinutes = affLastPrepMinutes + (Math.floor((secondsDiff + affLastPrepSeconds) / 60));
+    affPrepSeconds = secondsDiff % 60;
+    affPrepMinutes = Math.floor((secondsDiff) / 60);
     var secondsString = "";
     if (affPrepSeconds < 10) {
         secondsString = "0" + affPrepSeconds;
@@ -96,8 +97,8 @@ function updateAffPrepClock(startTime) {
         secondsString = affPrepSeconds;
     }
     document.getElementById("affClock").innerHTML = `${affPrepMinutes}:${secondsString}`;
-    if (minutes == 0 && seconds == 0) {
-        playDing();
+    if (affPrepMinutes == 0 && affPrepSeconds == 0) {
+        playAlarm();
         affPrepReset();
         document.getElementById("affClock").style.color = "#dc3545";
         document.getElementById("affClock").innerHTML = '0:00';
@@ -105,10 +106,11 @@ function updateAffPrepClock(startTime) {
 }
 
 function updateNegPrepClock(startTime) {
-    var change = Date.now() - startTime;
+    var endTime = startTime + (negPrepTimeLeft*1000)
+    var change = endTime - Date.now();
     var secondsDiff = Math.floor(change / 1000);
-    negPrepSeconds = ((secondsDiff + negLastPrepSeconds)% 60);
-    negPrepMinutes = negLastPrepMinutes + (Math.floor((secondsDiff + negLastPrepSeconds)/ 60));
+    negPrepSeconds = secondsDiff % 60;
+    negPrepMinutes = Math.floor((secondsDiff) / 60);
     var secondsString = "";
     if (negPrepSeconds < 10) {
         secondsString = "0" + negPrepSeconds;
@@ -117,8 +119,8 @@ function updateNegPrepClock(startTime) {
         secondsString = negPrepSeconds;
     }
     document.getElementById("negClock").innerHTML = `${negPrepMinutes}:${secondsString}`;
-    if (minutes == 0 && seconds == 0) {
-        playDing();
+    if (negPrepMinutes == 0 && negPrepSeconds == 0) {
+        playAlarm();
         negPrepReset();
         document.getElementById("negClock").style.color = "#dc3545";
         document.getElementById("negClock").innerHTML = '0:00';
@@ -133,20 +135,19 @@ function affPrepStart() {
 }
 
 function affPrepStop() {
-    affLastPrepSeconds = affPrepSeconds;
-    affLastPrepMinutes = affPrepMinutes;
+    affPrepTimeLeft = affPrepMinutes*60 + affPrepSeconds
     clearInterval(affTimerInterval);
     document.getElementById("affPrepStartButton").setAttribute("onClick", "javascript: affPrepStart()");
     document.getElementById("affPrepStartIcon").setAttribute("class", "fas fa-play");
 }
 
 function affPrepReset() {
-    affLastPrepMinutes = 0;
-    affLastPrepSeconds = 0;
-    document.getElementById("affClock").innerHTML = `0:00`;
+    affPrepTimeLeft = prepTime * 60;
+    document.getElementById("affClock").innerHTML = `${prepTime}:00`;
     clearInterval(affTimerInterval);
     document.getElementById("affPrepStartButton").setAttribute("onClick", "javascript: affPrepStart()");
     document.getElementById("affPrepStartIcon").setAttribute("class", "fas fa-play");
+    document.getElementById("affClock").style.color = "black";
 }
 
 function negPrepStart() {
@@ -157,22 +158,41 @@ function negPrepStart() {
 }
 
 function negPrepStop() {
-    negLastPrepSeconds = negPrepSeconds;
-    negLastPrepMinutes = negPrepMinutes;
+    negPrepTimeLeft = negPrepMinutes*60 + negPrepSeconds
     clearInterval(negTimerInterval);
     document.getElementById("negPrepStartButton").setAttribute("onClick", "javascript: negPrepStart()");
     document.getElementById("negPrepStartIcon").setAttribute("class", "fas fa-play");
 }
 
 function negPrepReset() {
-    negLastPrepMinutes = 0;
-    negLastPrepSeconds = 0;
-    document.getElementById("negClock").innerHTML = `0:00`;
+    negPrepTimeLeft = prepTime * 60;
+    document.getElementById("negClock").innerHTML = `${prepTime}:00`;
     clearInterval(negTimerInterval);
-    document.getElementById("negPrepStartButton").setAttribute("onClick", "javascript: negPrepstart()");
+    document.getElementById("negPrepStartButton").setAttribute("onClick", "javascript: negPrepStart()");
     document.getElementById("negPrepStartIcon").setAttribute("class", "fas fa-play");
+    document.getElementById("negClock").style.color = "black";
 }
 
 function playDing() {
-    document.getElementById("ding").play();
+    if(!isMuted){
+        document.getElementById("ding").play();
+    }
+}
+
+function playAlarm() {
+    if(!isMuted){
+        document.getElementById("alarm").play();
+    }
+}
+
+function mute(){
+    document.getElementById("volumeIcon").setAttribute("class", "fas fa-volume-off");
+    document.getElementById("volumeButton").setAttribute("onClick", "javascript: unmute()");
+    isMuted = true;
+}
+
+function unmute(){
+    document.getElementById("volumeIcon").setAttribute("class", "fas fa-volume-up");
+    document.getElementById("volumeButton").setAttribute("onClick", "javascript: mute()");
+    isMuted = false;
 }

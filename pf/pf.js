@@ -13,6 +13,7 @@ var currentRound = 0;
 var prepTime = 2;
 var affPrepTimeLeft = prepTime * 60;
 var negPrepTimeLeft = prepTime * 60;
+var isMuted = false;
 
 var roundNames = ["Team A Speaker 1","Team B Speaker 1","Crossfire","Team A Speaker 2","Team B Speaker 2","Crossfire","Team A Speaker 1", "Team B Speaker 1", "Grand Crossfire", "Team A Speaker 2", "Team B Speaker 2"];
 
@@ -81,7 +82,6 @@ function updateClock(startTime){
     }
 }
 
-
 function updateAffPrepClock(startTime) {
     var endTime = startTime + (affPrepTimeLeft*1000)
     var change = endTime - Date.now();
@@ -96,8 +96,8 @@ function updateAffPrepClock(startTime) {
         secondsString = affPrepSeconds;
     }
     document.getElementById("affClock").innerHTML = `${affPrepMinutes}:${secondsString}`;
-    if (minutes == 0 && seconds == 0) {
-        playDing();
+    if (affPrepMinutes == 0 && affPrepSeconds == 0) {
+        playAlarm();
         affPrepReset();
         document.getElementById("affClock").style.color = "#dc3545";
         document.getElementById("affClock").innerHTML = '0:00';
@@ -118,8 +118,8 @@ function updateNegPrepClock(startTime) {
         secondsString = negPrepSeconds;
     }
     document.getElementById("negClock").innerHTML = `${negPrepMinutes}:${secondsString}`;
-    if (minutes == 0 && seconds == 0) {
-        playDing();
+    if (negPrepMinutes == 0 && negPrepSeconds == 0) {
+        playAlarm();
         negPrepReset();
         document.getElementById("negClock").style.color = "#dc3545";
         document.getElementById("negClock").innerHTML = '0:00';
@@ -146,6 +146,7 @@ function affPrepReset() {
     clearInterval(affTimerInterval);
     document.getElementById("affPrepStartButton").setAttribute("onClick", "javascript: affPrepStart()");
     document.getElementById("affPrepStartIcon").setAttribute("class", "fas fa-play");
+    document.getElementById("affClock").style.color = "black";
 }
 
 function negPrepStart() {
@@ -168,8 +169,29 @@ function negPrepReset() {
     clearInterval(negTimerInterval);
     document.getElementById("negPrepStartButton").setAttribute("onClick", "javascript: negPrepStart()");
     document.getElementById("negPrepStartIcon").setAttribute("class", "fas fa-play");
+    document.getElementById("negClock").style.color = "black";
 }
 
 function playDing() {
-    document.getElementById("ding").play();
+    if(!isMuted){
+        document.getElementById("ding").play();
+    }
+}
+
+function playAlarm() {
+    if(!isMuted){
+        document.getElementById("alarm").play();
+    }
+}
+
+function mute(){
+    document.getElementById("volumeIcon").setAttribute("class", "fas fa-volume-off");
+    document.getElementById("volumeButton").setAttribute("onClick", "javascript: unmute()");
+    isMuted = true;
+}
+
+function unmute(){
+    document.getElementById("volumeIcon").setAttribute("class", "fas fa-volume-up");
+    document.getElementById("volumeButton").setAttribute("onClick", "javascript: mute()");
+    isMuted = false;
 }

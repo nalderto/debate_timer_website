@@ -31,7 +31,7 @@
 <body>
     <nav class="navbar navbar-expand-sm bg-success navbar-dark">
         <!-- Brand -->
-        <a class="navbar-brand" href="../index.html">DebateTimers</a>
+        <a class="navbar-brand" href="../index.html">Debate Timers</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#debateTypes">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -55,25 +55,36 @@
     <h1 id="roundName">
         Proposition Speaker 1
     </h1>
-
+    <div id="infoDiv">
+        <button id="infoButton" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#info">
+            <span id="infoIcon" class="fas fa-info"></span>
+        </button>
+    </div>
+    <div id="volumeDiv">
+        <button id="volumeButton" type="button" class="btn btn-secondary" onclick="mute()">
+            <span id="volumeIcon" class="fas fa-volume-up"></span>
+        </button>
+    </div>
     <h1 id="clock">
         0:00
     </h1>
     <div class="container" id="buttonGroup">
         <div class="row text-center">
-            <div class="col-sm">
+            <div class="col-sm-auto">
                 <button type="button" class="btn btn-primary" onclick="lastRound()">
                     <span class="fas fa-caret-left"></span> Previous</button>
             </div>
-            <div class="col-sm">
+            <div class="col-sm-auto">
                 <button id="startButton" type="button" class="btn btn-success" onclick="start()">
-                    <span id ="startIcon" class="fas fa-play"></span> <span id="startTitle"> Start</span></button>
+                    <span id="startIcon" class="fas fa-play"></span>
+                    <span id="startTitle"> Start</span>
+                </button>
             </div>
-            <div class="col-sm">
-                <button id="restartButton"type="button" class="btn btn-danger" onclick="reset()">
+            <div class="col-sm-auto">
+                <button id="restartButton" type="button" class="btn btn-danger" onclick="reset()">
                     <span class="fas fa-undo"></span> Reset</button>
             </div>
-            <div class="col-sm">
+            <div class="col-sm-auto">
                 <button type="button" class="btn btn-primary" onclick="nextRound()">Next
                     <span class="fas fa-caret-right"></span>
                 </button>
@@ -89,5 +100,55 @@
 
     <!--Audio-->
     <audio id="ding" src="../audio/ding.wav" preload="auto"></audio>
+
+    <!-- Info Modal -->
+    <div class="modal fade" id="info">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">World Schools Debate Format</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="span6">
+                            <div class="mycontent-left">
+                                Proposition Speaker 1
+                                <br> Opposition Speaker 1
+                                <br> Proposition Speaker 2
+                                <br> Opposition Speaker 2
+                                <br> Proposition Speaker 3
+                                <br> Opposition Speaker 3
+                                <br> Opposition Reply
+                                <br> Proposition Reply
+                            </div>
+                        </div>
+                        <div class="span6">
+                            <div class="mycontent-right">
+                                8 Minutes
+                                <br> 8 Minutes
+                                <br> 8 Minutes
+                                <br> 8 Minutes
+                                <br> 8 Minutes
+                                <br> 8 Minutes
+                                <br> 4 Minutes
+                                <br> 4 Minutes
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>

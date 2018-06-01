@@ -13,7 +13,7 @@
 }
 
 #buttonGroup {
-    max-width: 550px;
+    max-width: 525px;
 }
 
 #startButton {
@@ -70,3 +70,40 @@
 .list-item{
     color: #007bff;
 }
+
+#volumeDiv{
+    margin-bottom: -50px;
+    text-align: right;
+    margin-right: 15px;
+}
+
+#volumeButton{
+    width: 42px;
+}
+
+#infoDiv{
+    margin-bottom: -48px;
+    text-align: right;
+    margin-right: 65px;
+}
+
+#infoButton{
+    width: 42px;
+}
+
+.mycontent-left {
+    border-right: 1px solid #333;
+    padding-left: 10px;
+    padding-right: 15px;
+}
+
+.mycontent-right {
+    padding-left: 20px;
+}
+
+.modal-header {
+    background-color: #007bff;
+    padding:16px 16px;
+    color:#FFF;
+    border-bottom:2px dashed #007bff;
+ }

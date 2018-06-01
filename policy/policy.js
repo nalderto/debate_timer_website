@@ -13,8 +13,9 @@ var currentRound = 0;
 var prepTime = 5;
 var affPrepTimeLeft = prepTime * 60;
 var negPrepTimeLeft = prepTime * 60;
+var isMuted = false;
 
-var roundNames = ["1st Affirmative Constructive","Cross Examination","1st Negative Constructive","Cross Examination","2nd Affirmative Constructive","Cross Examination","2nd Affirmative Constructive", "Cross Examination", "1st Negative Rebuttal", "1st Affirmative Rebuttal", "2nd Negative Rebuttal", "2nd Affirmative Rebuttal"];
+var roundNames = ["1st Affirmative Constructive","Cross Examination","1st Negative Constructive","Cross Examination","2nd Affirmative Constructive","Cross Examination","2nd Negative Constructive", "Cross Examination", "1st Negative Rebuttal", "1st Affirmative Rebuttal", "2nd Negative Rebuttal", "2nd Affirmative Rebuttal"];
 
 var roundTimes = [8, 3, 8, 3, 8, 3, 8, 3, 5, 5, 5, 5];
 
@@ -36,7 +37,7 @@ function stop(){
 }
 
 function nextRound(){
-    if(currentRound < 6){
+    if(currentRound < 11){
         currentRound++;
     }
     document.getElementById("roundName").innerHTML = roundNames[currentRound];
@@ -94,7 +95,7 @@ function updateAffPrepClock(startTime) {
     }
     document.getElementById("affClock").innerHTML = `${affPrepMinutes}:${secondsString}`;
     if (affPrepMinutes == 0 && affPrepSeconds == 0) {
-        playDing();
+        playAlarm();
         affPrepReset();
         document.getElementById("affClock").style.color = "#dc3545";
         document.getElementById("affClock").innerHTML = '0:00';
@@ -117,7 +118,7 @@ function updateNegPrepClock(startTime) {
     }
     document.getElementById("negClock").innerHTML = `${negPrepMinutes}:${secondsString}`;
     if (negPrepMinutes == 0 && negPrepSeconds == 0) {
-        playDing();
+        playAlarm();
         negPrepReset();
         document.getElementById("negClock").style.color = "#dc3545";
         document.getElementById("negClock").innerHTML = '0:00';
@@ -171,5 +172,25 @@ function negPrepReset() {
 }
 
 function playDing() {
-    document.getElementById("ding").play();
+    if(!isMuted){
+        document.getElementById("ding").play();
+    }
+}
+
+function playAlarm() {
+    if(!isMuted){
+        document.getElementById("alarm").play();
+    }
+}
+
+function mute(){
+    document.getElementById("volumeIcon").setAttribute("class", "fas fa-volume-off");
+    document.getElementById("volumeButton").setAttribute("onClick", "javascript: unmute()");
+    isMuted = true;
+}
+
+function unmute(){
+    document.getElementById("volumeIcon").setAttribute("class", "fas fa-volume-up");
+    document.getElementById("volumeButton").setAttribute("onClick", "javascript: mute()");
+    isMuted = false;
 }

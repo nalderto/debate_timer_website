@@ -3,7 +3,7 @@ var minutes = 0;
 var seconds = 0;
 var lastMinutes = 0;
 var lastSeconds = 0;
-
+var isMuted = false;
 var currentRound = 0;
 
 var roundNames = ["Proposition Speaker 1","Opposition Speaker 1","Proposition Speaker 2","Opposition Speaker 2","Proposition Speaker 3","Opposition Speaker 3","Opposition Reply", "Proposition Reply"];
@@ -100,5 +100,19 @@ function updateClock(startTime){
 }
 
 function playDing() {
-    document.getElementById("ding").play();
+    if(!isMuted){
+        document.getElementById("ding").play();
+    }
+}
+
+function mute(){
+    document.getElementById("volumeIcon").setAttribute("class", "fas fa-volume-off");
+    document.getElementById("volumeButton").setAttribute("onClick", "javascript: unmute()");
+    isMuted = true;
+}
+
+function unmute(){
+    document.getElementById("volumeIcon").setAttribute("class", "fas fa-volume-up");
+    document.getElementById("volumeButton").setAttribute("onClick", "javascript: mute()");
+    isMuted = false;
 }
