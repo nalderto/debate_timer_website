@@ -4,13 +4,13 @@
 <head>
     <meta charset='UTF-8'>
     <meta content="width=device-width,initial-scale=1" name="viewport" />
-    <title>LD Timer</title>
-    <meta name="description" content="Lincoln-Douglas Debate Timer">
+    <title>Extemporaneous Debate Timer</title>
+    <meta name="description" content="Extemporaneous Debate Timer">
     <!-- Personal CSS File -->
     <link href="../styles.css" type="text/css" rel="stylesheet">
 
     <!-- Personal JavaScript File -->
-    <script src="ld.js"></script>
+    <script src="ed.js"></script>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 
@@ -36,10 +36,10 @@
                     <a class="nav-link" href="../bq/bq.html">Big Questions</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../ed/ed.html">Extemporaneous</a>
+                    <a class="nav-link active" href="../ed/ed.html">Extemporaneous</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="../ld/ld.html">Lincoln-Douglas</a>
+                    <a class="nav-link" href="../ld/ld.html">Lincoln-Douglas</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../policy/policy.html">Policy</a>
@@ -54,7 +54,7 @@
         </div>
     </nav>
     <h1 id="roundName">
-        Affirmative Constructive
+        Proposition Constructive
     </h1>
     <div id="volumeDiv">
         <button id="volumeButton" type="button" class="btn btn-secondary" onclick="mute()">
@@ -95,66 +95,6 @@
     <div class="collapse" id="overtimeWrapper">
         <h1 class="text-center" id="overtimeLabel">Overtime</h2>
     </div>
-    <h1 class="text-center">Prep Time</h1>
-    <div class="container text-center">
-        <div class="btn-group">
-            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">4 Minutes
-                <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-                <li class="dropdown-item px-2" value="1">
-                    <a href="#">1 Minutes</a>
-                </li>
-                <li class="dropdown-item px-2" value="2">
-                    <a href="#">2 Minutes</a>
-                </li>
-                <li class="dropdown-item px-2" value="3">
-                    <a href="#">3 Minutes</a>
-                </li>
-                <li class="dropdown-item px-2" value="4">
-                    <a href="#">4 Minutes</a>
-                </li>
-                <li class="dropdown-item px-2" value="5">
-                    <a href="#">5 Minutes</a>
-                </li>
-                <li class="dropdown-item px-2" value="6">
-                    <a href="#">6 Minutes</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-sm-auto">
-                <h3 class="text-center">Affirmation</h3>
-                <h2 id="affClock" class="text-center prepClock">
-                    4:00
-                </h2>
-                <div class="container text-center" id="buttonGroup">
-                    <button id="affPrepStartButton" type="button" class="btn btn-success" onclick="affPrepStart()">
-                        <span id="affPrepStartIcon" class="fas fa-play"></span>
-                    </button>
-                    <button type="button" class="btn btn-danger" onclick="affPrepReset()">
-                        <span class="fas fa-undo"></span>
-                    </button>
-                </div>
-            </div>
-            <div class="col-sm-auto">
-                <h3 class="text-center">Negation</h3>
-                <h2 id="negClock" class="text-center prepClock">
-                    4:00
-                </h2>
-                <div class="container text-center" id="buttonGroup">
-                    <button id="negPrepStartButton" type="button" class="btn btn-success" onclick="negPrepStart()">
-                        <span id="negPrepStartIcon" class="fas fa-play"></span>
-                    </button>
-                    <button type="button" class="btn btn-danger" onclick="negPrepReset()">
-                        <span class="fas fa-undo"></span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!--Audio-->
     <audio id="ding" src="../audio/ding.wav" preload="auto"></audio>
@@ -167,7 +107,7 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Lincoln-Douglas Format</h4>
+                    <h4 class="modal-title">Big Questions Format</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
@@ -176,24 +116,30 @@
                     <div class="row">
                         <div class="span6">
                             <div class="mycontent-left">
-                                Affirmative Constructive
-                                <br> Cross Examination
-                                <br> Negative Constructive
-                                <br> Cross Examination
-                                <br> First Affirmative Rebuttal
-                                <br> Negative Rebuttal
-                                <br> Seconds Affirmative Rebuttal
+                                Proposition Constructive
+                                <br> Cross Examination of Proposition
+                                <br> Opposition Constructive
+                                <br> Cross Examination of Opposition
+                                <br> Mandatory Prep Time
+                                <br> Proposition Rebuttal
+                                <br> Opposition Rebuttal
+                                <br> Mandatory Prep Time
+                                <br> Proposition Rebuttal
+                                <br> Opposition Rebuttal
                             </div>
                         </div>
                         <div class="span6">
                             <div class="mycontent-right">
-                                6 Minutes
-                                <br> 3 Minutes
-                                <br> 7 Minutes
-                                <br> 3 Minutes
-                                <br> 4 Minutes
-                                <br> 6 Minutes
-                                <br> 3 Minutes
+                                2 Minutes
+                                <br> 1 Minute
+                                <br> 2 Minutes
+                                <br> 1 Minute
+                                <br> 1 Minute
+                                <br> 2 Minutes
+                                <br> 2 Minutes
+                                <br> 1 Minute
+                                <br> 2 Minutes
+                                <br> 2 Minutes
                             </div>
                         </div>
                     </div>
@@ -215,15 +161,6 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <!--Dropdown Javascript-->
-    <script>
-        $(".dropdown-menu li").click(function () {
-            var selText = $(this).children().text();
-            $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
-            prepTime = $(this).val();
-            affPrepReset();
-            negPrepReset()
-        });
-    </script>
 </body>
 
 </html>
